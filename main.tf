@@ -7,6 +7,7 @@ provider "aws" {
 resource "aws_amplify_app" "cloud_programming_app" {
   name = "cloud_programming_website"
   repository = "https://github.com/dennis-iu/iu_cloud_programming"
+  oauth_token = var.github_token
 
   build_spec = <<BUILD_SPEC
 version: 1
