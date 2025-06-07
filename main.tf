@@ -3,7 +3,17 @@ provider "aws" {
   region = "eu-central-1" # Europe (Frankfurt)
 }
 
-# 2. Amplify App erstellen
+# 2. Terraform Backend einrichten
+terraform {
+  backend "s3" {
+    bucket         = "tf-cloud-programming"
+    key            = "amplify/cloud_programming_app/terraform.tfstate"
+    region         = "eu-central-1"
+    encrypt        = true
+  }
+}
+
+# 3. Amplify App erstellen
 resource "aws_amplify_app" "cloud_programming_app" {
   name = "cloud_programming_website"
   repository = "https://github.com/dennis-iu/iu_cloud_programming"
@@ -22,9 +32,16 @@ frontend:
   cache:
     paths: []
 BUILD_SPEC
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [
+      oauth_token
+    ]
+  }
 }
 
-# 3. Automatisches Deployment für Main aktivieren
+# 4. Automatisches Deployment für Main aktivieren
 resource "aws_amplify_branch" "main" {
   app_id = aws_amplify_app.cloud_programming_app.id
   branch_name = "main"
