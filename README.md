@@ -6,8 +6,10 @@
 /.github/worflows/deploy.yml - Ausführungspipeline beim push auf main  
 /images/amplify_hosting_diagramm.png - Diagramm zum Projekt  
 /images/iu_logo.png - Logo der IU  
+/terraform/main.tf - Erstellt Amplify App  
+/terraform/provider.tf - Konfiguriert Cloud Anbieter  
+/terraform/variables.tf - Setzt Variablen für Terraform  
 index.html - Code für die zu hostende statische Website  
-main.tf - Terraform Code  
 README  
 
 **Funktion des Projektes:**  
